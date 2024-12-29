@@ -1,22 +1,29 @@
 import React from 'react';
 import useCardStore from '../../store/cardStore';
 import { NavLink } from 'react-router';
-import { ImageList, ImageListItem, useMediaQuery  } from '@mui/material';
+import { ImageList, ImageListItem, useMediaQuery } from '@mui/material';
 import MyCircularProgress from '../my-circular-progress/myCircularProgress';
+import './cards.css';
 
 const CardList = () => {
   const cards = useCardStore((state) => state.cards);
   const cardsLoading = useCardStore((state) => state.cardsLoading);
-  const md = useMediaQuery('(min-width:600px)');
+  const sm = useMediaQuery('(min-width:400px)');
+  const md = useMediaQuery('(min-width:768px)');
   const lg = useMediaQuery('(min-width:900px)');
-  const imageListCols = lg ? 6 : md ? 4 : 1;
+  const xl = useMediaQuery('(min-width:1200px)');
+  const imageListColumns = xl ? 6 : lg ? 5 : md ? 4 : sm ? 2 : 1;
 
   if (cardsLoading) {
-    return <MyCircularProgress />;
+    return (
+      <div className="loading-container">
+        <MyCircularProgress />
+      </div>
+    );
   }
 
   return (
-    <ImageList sx={{ width: "100%", height: "100%" }} gap={24} cols={imageListCols} rowHeight="auto">
+    <ImageList className='card-list-image' sx={{ width: "100%", height: "100%" }} gap={24} cols={imageListColumns} rowHeight="auto">
       {cards.map((card) => (
         <NavLink to={`/card/${card.id}`} key={card.id}>
           <ImageListItem key={card.id} className="card-list-image-item">

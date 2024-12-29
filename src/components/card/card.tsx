@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { API_BASE_URL } from "../../constants";
 import useCardStore from "../../store/cardStore";
 import { useDebounceCallback } from "usehooks-ts";
@@ -11,6 +11,7 @@ const Card = () => {
   const [loading, setLoading] = useState(true);
   const setCard = useCardStore((state) => state.setCard);
   const card = useCardStore((state) => state.card);
+  const navigate = useNavigate();
 
   const lazyLoad = useDebounceCallback(() => {
     axios.get(`${API_BASE_URL}/cards/${id}`)
@@ -39,7 +40,10 @@ const Card = () => {
   }
 
   return (
-    <div>card {card.name}</div>
+    <>
+      <button onClick={() => navigate('/cards')}>Back to homepage</button>  
+      <div>card {card.name}</div>
+    </>
   );
 }
 

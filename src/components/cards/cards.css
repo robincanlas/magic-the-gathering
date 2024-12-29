@@ -1,0 +1,13 @@
+.MuiImageList-root.card-list-image {
+  padding: 10px 0px;
+}
+
+.MuiImageListItem-root.card-list-image-item {
+  transform: scale3d(1, 1, 1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.MuiImageListItem-root.card-list-image-item:hover {
+  transform: scale3d(1.05, 1.05, 1)
+}
+

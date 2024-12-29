@@ -1,8 +1,11 @@
 import { CircularProgress } from "@mui/material";
+import './myCircularProgress.css';
 
 const MyCircularProgress = () => {
   return (
-    <CircularProgress color="inherit" />
+    <div className="loading-container">
+      <CircularProgress color="inherit" />
+    </div>
   )
 }
 
