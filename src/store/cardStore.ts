@@ -36,20 +36,24 @@ export interface Card {
 
 export interface CardState {
   cards: Card[];
+  cardsLoading: boolean;
   card: Card | null;
   hasMore: boolean;
   totalCards: number;
   setCards: (cards: Card[]) => void;
   setCard: (card: Card) => void;
+  setCardsLoading: (loading: boolean) => void;
 }
 
 const useCardStore = create<CardState>((set) => ({
   cards: [],
+  cardsLoading: false,
   card: null,
   hasMore: false,
   totalCards: 0,
   setCards: (cards: Card[]) => set({ cards }),
   setCard: (card: Card) => set({ card }),
+  setCardsLoading: (loading: boolean) => set({ cardsLoading: loading }),
 }));
 
 export default useCardStore;

@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { API_BASE_URL } from "../../constants";
 import useCardStore from "../../store/cardStore";
 import { useDebounceCallback } from "usehooks-ts";
+import MyCircularProgress from "../my-circular-progress/myCircularProgress";
 
 const Card = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const Card = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <MyCircularProgress />;
   }
 
   if (!card) {
