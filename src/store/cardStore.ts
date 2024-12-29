@@ -36,16 +36,20 @@ export interface Card {
 
 export interface CardState {
   cards: Card[];
+  card: Card | null;
   hasMore: boolean;
   totalCards: number;
   setCards: (cards: Card[]) => void;
+  setCard: (card: Card) => void;
 }
 
 const useCardStore = create<CardState>((set) => ({
   cards: [],
+  card: null,
   hasMore: false,
   totalCards: 0,
   setCards: (cards: Card[]) => set({ cards }),
+  setCard: (card: Card) => set({ card }),
 }));
 
 export default useCardStore;
