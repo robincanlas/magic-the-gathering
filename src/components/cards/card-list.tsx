@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useCardStore from '../../store/cardStore';
 import { NavLink } from 'react-router';
 import { ImageList, ImageListItem, useMediaQuery } from '@mui/material';
 import MyCircularProgress from '../my-circular-progress/myCircularProgress';
 import './cards.css';
+import useCardSearch from '../../hooks/useCardSearch';
 
 const CardList = () => {
   const cards = useCardStore((state) => state.cards);
   const cardsLoading = useCardStore((state) => state.cardsLoading);
+  const setCardsLoading = useCardStore((state) => state.setCardsLoading);
+  const { lazyFetch } = useCardSearch();
   const sm = useMediaQuery('(min-width:400px)');
   const md = useMediaQuery('(min-width:768px)');
   const lg = useMediaQuery('(min-width:900px)');
   const xl = useMediaQuery('(min-width:1200px)');
   const imageListColumns = xl ? 6 : lg ? 5 : md ? 4 : sm ? 2 : 1;
+
+  useEffect(() => {
+    setCardsLoading(true);
+    lazyFetch('is:reserved', () => {
+      setCardsLoading(false);
+    });
+  }, []);
 
   if (cardsLoading) {
     return (
