@@ -4,8 +4,6 @@
 }
 
 .card-page-card-image {
-  transform: scale(0.7);
-  transform-origin: center top;
 }
 
 .card-page-card-info {
@@ -25,5 +23,12 @@
     width: 130px;
     text-align: right;
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card-page-card-image {
+    transform: scale(0.7);
+    transform-origin: center;
   }
 }
