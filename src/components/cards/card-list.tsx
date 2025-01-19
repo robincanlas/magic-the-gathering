@@ -5,6 +5,7 @@ import { ImageList, ImageListItem, useMediaQuery } from '@mui/material';
 import MyCircularProgress from '../my-circular-progress/myCircularProgress';
 import './cards.css';
 import useCardSearch from '../../hooks/useCardSearch';
+import ScrollTopButton from '../scroll-top/scroll-top';
 
 const CardList = () => {
   const cards = useCardStore((state) => state.cards);
@@ -33,20 +34,23 @@ const CardList = () => {
   }
 
   return (
-    <ImageList className='card-list-image' sx={{ width: "100%", height: "100%" }} gap={24} cols={imageListColumns} rowHeight="auto">
-      {cards.map((card) => (
-        <NavLink to={`/card/${card.id}`} key={card.id}>
-          <ImageListItem key={card.id} className="card-list-image-item">
-            <img
-              srcSet={`${card.imageUris.normal}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              src={`${card.imageUris.normal}?w=164&h=164&fit=crop&auto=format`}
-              alt={card.name}
-              loading="lazy"
-            />
-          </ImageListItem>
-        </NavLink>
-      ))}
-    </ImageList>
+    <>
+      <ImageList className='card-list-image' sx={{ width: "100%", height: "100%" }} gap={24} cols={imageListColumns} rowHeight="auto">
+        {cards.map((card) => (
+          <NavLink to={`/card/${card.id}`} key={card.id}>
+            <ImageListItem key={card.id} className="card-list-image-item">
+              <img
+                srcSet={`${card.imageUris.normal}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                src={`${card.imageUris.normal}?w=164&h=164&fit=crop&auto=format`}
+                alt={card.name}
+                loading="lazy"
+              />
+            </ImageListItem>
+          </NavLink>
+        ))}
+      </ImageList>
+      <ScrollTopButton />
+    </>
   );
 };
 
