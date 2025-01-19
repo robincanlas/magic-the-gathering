@@ -5,15 +5,15 @@ import Card from './components/card/card';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
   },
 });
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>
