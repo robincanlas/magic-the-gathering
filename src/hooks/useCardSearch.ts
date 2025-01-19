@@ -6,6 +6,9 @@ import { useDebounceCallback } from 'usehooks-ts';
 const useCardSearch = () => {
   const constructCardList = (cardData: CardData[]): Card[] => {
     const cards = cardData.map((card: CardData) => ({
+      ...card,
+      image_uris: card.image_uris ? card.image_uris : { small: '', normal: '', large: '', png: '' }
+    })).map((card: CardData) => ({
       id: card.id,
       artist: card.artist,
       name: card.name,
