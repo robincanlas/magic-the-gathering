@@ -20,7 +20,7 @@ export interface CardPrices {
   eur: number;
 }
 
-export interface CardData {
+export interface CardData extends CardInfo {
   id: string;
   artist: string;
   name: string;
@@ -29,6 +29,7 @@ export interface CardData {
   multiverse_ids: number[];
   prices: CardPrices;
   image_uris: CardImage;
+  oracle_text?: string;
 }
 
 export interface Card {
@@ -42,10 +43,15 @@ export interface Card {
   imageUris: CardImage;
 }
 
+export interface CardInfo extends Card {
+  oracleText?: string;
+  rarity?: string;
+}
+
 export interface CardState {
   cards: Card[];
   cardsLoading: boolean;
-  card: Card | null;
+  card: CardInfo | null;
   hasMore: boolean;
   totalCards: number;
   nextPageUrl: string;
@@ -55,7 +61,7 @@ export interface CardState {
   searchUri: string;
   page: number;
   setCards: (cards: Card[]) => void;
-  setCard: (card: Card) => void;
+  setCard: (card: CardInfo) => void;
   setCardsLoading: (loading: boolean) => void;
   setHasMore: (hasMore: boolean) => void;
   setTotalCards: (totalCards: number) => void;
@@ -79,7 +85,7 @@ const useCardStore = create<CardState>((set) => ({
   searchUri: '',
   page: 1,
   setCards: (cards: Card[]) => set({ cards }),
-  setCard: (card: Card) => set({ card }),
+  setCard: (card: CardInfo) => set({ card }),
   setCardsLoading: (loading: boolean) => set({ cardsLoading: loading }),
   setHasMore: (hasMore: boolean) => set({ hasMore }),
   setTotalCards: (totalCards: number) => set({ totalCards }),

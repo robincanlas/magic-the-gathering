@@ -1,0 +1,29 @@
+.card-page-card-info-wrapper {
+  display: flex; 
+  gap: 50px;
+}
+
+.card-page-card-image {
+  transform: scale(0.7);
+  transform-origin: center top;
+}
+
+.card-page-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-page-card-info .row {
+  display: flex;
+  gap: 10px;
+
+  .value {
+    width: 60%;
+  }
+
+  .label {
+    width: 130px;
+    text-align: right;
+    font-weight: bold;
+  }
+}

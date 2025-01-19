@@ -1,14 +1,22 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
-import useCardStore, { Card, CardData, ScryFallResponse } from '../store/cardStore';
+import useCardStore, { Card, CardData, CardInfo, ScryFallResponse } from '../store/cardStore';
 import { useDebounceCallback } from 'usehooks-ts';
 
 const useCardSearch = () => {
-  const constructCardList = (cardData: CardData[]): Card[] => {
-    const cards = cardData.map((card: CardData) => ({
-      ...card,
-      image_uris: card.image_uris ? card.image_uris : { small: '', normal: '', large: '', png: '' }
-    })).map((card: CardData) => ({
+
+  const getCardDataForView = (card: CardData): CardInfo => {
+    const partialData = getCardData(card);
+    return {
+      ...partialData,
+      oracleText: card.oracle_text,
+      rarity: card.rarity
+    }
+  }
+
+
+  const getCardData = (card: CardData) => {
+    return {
       id: card.id,
       artist: card.artist,
       name: card.name,
@@ -25,7 +33,13 @@ const useCardSearch = () => {
         large: card.image_uris.large,
         png: card.image_uris.png
       }
-    }));
+    }
+  }
+  const constructCardList = (cardData: CardData[]): Card[] => {
+    const cards = cardData.map((card: CardData) => ({
+      ...card,
+      image_uris: card.image_uris ? card.image_uris : { small: '', normal: '', large: '', png: '' }
+    })).map((card: CardData) => (getCardData(card)));
     return cards;
   }
 
@@ -67,7 +81,9 @@ const useCardSearch = () => {
 
   return {
     lazyFetch,
-    lazyFetchCustomUri
+    lazyFetchCustomUri,
+    getCardData,
+    getCardDataForView
   };
 };
 
