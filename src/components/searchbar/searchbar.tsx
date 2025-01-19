@@ -71,10 +71,12 @@ function HideOnScroll({ children }: { children: React.ReactElement }) {
 export default function SearchAppBar() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
+  const setSearchTermStore = useCardStore((state) => state.setSearchTerm);
   const { lazyFetch } = useCardSearch();
 
   const handleSearch = () => {
     setCardsLoading(true);
+    setSearchTermStore(searchTerm);
     lazyFetch(searchTerm, () => {
       setCardsLoading(false);
     });

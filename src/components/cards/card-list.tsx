@@ -11,6 +11,7 @@ const CardList = () => {
   const cards = useCardStore((state) => state.cards);
   const cardsLoading = useCardStore((state) => state.cardsLoading);
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
+  const setSearchTerm = useCardStore((state) => state.setSearchTerm);
   const { lazyFetch } = useCardSearch();
   const sm = useMediaQuery('(min-width:400px)');
   const md = useMediaQuery('(min-width:768px)');
@@ -20,6 +21,7 @@ const CardList = () => {
 
   useEffect(() => {
     setCardsLoading(true);
+    setSearchTerm('is:reserved');
     lazyFetch('is:reserved', () => {
       setCardsLoading(false);
     });

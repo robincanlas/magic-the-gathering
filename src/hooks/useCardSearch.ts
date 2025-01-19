@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
-import useCardStore, { CardData } from '../store/cardStore';
+import useCardStore, { Card, CardData, ScryFallResponse } from '../store/cardStore';
 import { useDebounceCallback } from 'usehooks-ts';
 
 const useCardSearch = () => {
-  const setCards = useCardStore((state) => state.setCards);
-
-  const constructCardList = (cardData: CardData[]) => {
+  const constructCardList = (cardData: CardData[]): Card[] => {
     const cards = cardData.map((card: CardData) => ({
       id: card.id,
       artist: card.artist,
@@ -25,14 +23,23 @@ const useCardSearch = () => {
         png: card.image_uris.png
       }
     }));
-    setCards(cards);
+    return cards;
+  }
+
+  const constructData = (data: ScryFallResponse, searchUri: string) => {
+    const hasMore = data.has_more;
+    const totalCards = data.total_cards;
+    const nextPageUrl = data.next_page;
+    const prevPageUrl = data.prev_page;
+    const cards = constructCardList(data.data);
+    useCardStore.setState({ hasMore, totalCards, nextPageUrl, prevPageUrl, cards, searchUri });
   }
 
   const lazyFetch = useDebounceCallback((searchTerm: string, cb?: () => void) => {
-    axios.get(`${API_BASE_URL}/cards/search?q=${searchTerm}`)
+    const searchUri = `${API_BASE_URL}/cards/search?q=${searchTerm}`;
+    axios.get(searchUri)
     .then((response) => {
-      const data = response.data;
-      constructCardList(data.data);
+      constructData(response.data, searchUri);
     }).catch((error) => {
       console.error(error);
     }).finally(() => {
@@ -45,8 +52,7 @@ const useCardSearch = () => {
   const lazyFetchCustomUri = useDebounceCallback((customUri: string, cb?: () => void) => {
     axios.get(customUri)
     .then((response) => {
-      const data = response.data;
-      constructCardList(data.data);
+      constructData(response.data, customUri);
     }).catch((error) => {
       console.error(error);
     }).finally(() => {
