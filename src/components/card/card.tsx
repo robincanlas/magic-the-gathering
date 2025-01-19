@@ -11,7 +11,7 @@ import { Button, Container } from "@mui/material";
 
 const CardPage = () => {
   const { id } = useParams();
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const setCard = useCardStore((state) => state.setCard);
   const card = useCardStore((state) => state.card);
