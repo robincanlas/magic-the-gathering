@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { API_BASE_URL } from "../../constants";
 import useCardStore, { CardData } from "../../store/cardStore";
 import { useDebounceCallback } from "usehooks-ts";
 import MyCircularProgress from "../my-circular-progress/myCircularProgress";
 import useCardSearch from "../../hooks/useCardSearch";
 import CardInfo from "./card-info";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 
 const CardPage = () => {
   const { id } = useParams();
+  const { navigate } = useNavigate();
   const [loading, setLoading] = useState(true);
   const setCard = useCardStore((state) => state.setCard);
   const card = useCardStore((state) => state.card);
@@ -44,9 +45,12 @@ const CardPage = () => {
 
 
   return (
-    <Container maxWidth="md" sx={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
-      <CardInfo />
-    </Container>
+    <>
+      <Button onClick={() => navigate(`/cards`)}>Back to Homepage</Button>
+      <Container maxWidth="md" sx={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
+        <CardInfo />
+      </Container>
+    </>
   );
 }
 

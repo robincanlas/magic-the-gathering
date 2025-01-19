@@ -13,7 +13,7 @@ const CustomPagination = () => {
   const { lazyFetchCustomUri } = useCardSearch();
   const pageCount = Math.ceil(totalCards / 175);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
     setCardsLoading(true);
     lazyFetchCustomUri(`${API_BASE_URL}/cards/search?q=${searchTerm}&page=${page}`, () => {

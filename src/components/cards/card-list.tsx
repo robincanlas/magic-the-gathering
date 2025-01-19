@@ -1,4 +1,3 @@
-import React from 'react';
 import useCardStore, { Card } from '../../store/cardStore';
 import { NavLink } from 'react-router';
 import { ImageList, ImageListItem, useMediaQuery } from '@mui/material';

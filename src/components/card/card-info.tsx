@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Grid from '@mui/material/Grid2';
-import useCardStore, { CardData } from "../../store/cardStore";
+import useCardStore from "../../store/cardStore";
 import './card.css';
 import CardText from "./card-text";
 

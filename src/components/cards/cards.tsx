@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchBar from '../searchbar/searchbar';
 import CardList from './card-list';
 import CustomPagination from '../custom-pagination/custom-pagination';
