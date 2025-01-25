@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router";
+import { HashRouter, Routes, Route, Outlet } from "react-router";
 import './App.css'
 import Cards from './components/cards/cards'
 import Card from './components/card/card';
@@ -34,7 +34,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route element={<Layout />} >
             <Route path="/" element={<Cards />} />
@@ -43,7 +43,7 @@ function App() {
             <Route path="*" element={<>Page not found</>} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   )
 }
