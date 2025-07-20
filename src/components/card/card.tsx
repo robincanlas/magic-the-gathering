@@ -45,12 +45,12 @@ const CardPage = () => {
 
 
   return (
-    <>
-      <Button onClick={() => navigate(`/cards`)}>Back to Homepage</Button>
+    <div className="card-page">
+      <Button onClick={() => navigate(`/`)}>Back to Homepage</Button>
       <Container maxWidth="md" sx={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
         <CardInfo />
       </Container>
-    </>
+    </div>
   );
 }
 

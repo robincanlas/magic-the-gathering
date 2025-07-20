@@ -1,9 +1,15 @@
+.card-page {
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+}
+
 .card-page-card-info-wrapper {
   width: 100%;
   display: block;
   position: relative;
   box-sizing: border-box;
   height: 100%;
+  padding: 2em;
 }
 
 .card-page-card-info {
@@ -41,10 +47,6 @@
 }
 
 @media screen and (max-width: 600px) {
-  .card-page-card-image {
-    transform: scale(0.7);
-    transform-origin: center;
-  }
   .card-page-card-info {
     padding: 0 0 2em 0;
     .row {

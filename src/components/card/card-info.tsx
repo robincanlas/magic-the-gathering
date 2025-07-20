@@ -11,10 +11,10 @@ const CardInfo = () => {
 
   return (
     <>
-      <Box className="card-page-card-info-wrapper" sx={{ width: '100%' }}>
+      <Box className="card-page-card-info-wrapper">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }} columns={{ xs: 16, sm: 16, md: 16 }}>
-          <Grid height={{ xs: 700, sm: 700, md: 'auto' }} size={{ xs: 16, sm: 16, md: 8 }} sx={{ display: 'flex', justifyContent: 'center'}}>
-          <img className="card-page-card-image" src={card?.imageUris.normal} alt={card?.name} />
+          <Grid height={{ xs: 430, sm: 430, md: 600 }} size={{ xs: 16, sm: 16, md: 8 }} sx={{ display: 'flex', justifyContent: 'center'}}>
+            <img className="card-page-card-image" src={card?.imageUris.large} alt={card?.name} />
           </Grid>
           <Grid className="card-page-card-info" size={{ xs: 16, sm: 16, md: 8 }}>
             <div className="row">

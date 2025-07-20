@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useEffect } from "react";
 import useCardStore from "./store/cardStore";
 import useCardSearch from "./hooks/useCardSearch";
+import SearchBar from './components/searchbar/searchbar';
 
 const theme = createTheme({
   colorSchemes: {
@@ -27,7 +28,12 @@ const Layout = () => {
     });
   }, []);
   
-  return <Outlet />;
+  return (
+    <>
+      <SearchBar />
+      <Outlet />
+    </>
+  );
 };
 
 function App() {

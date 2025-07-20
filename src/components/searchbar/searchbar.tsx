@@ -12,6 +12,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { Slide } from '@mui/material';
 import logo from '../../assets/magic-logo.svg';
 import ThemeSwitcher from '../theme-switcher/theme-switcher';
+import { useLocation, useNavigate } from 'react-router';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,13 +69,21 @@ function HideOnScroll({ children }: { children: React.ReactElement }) {
   );
 }
 
+const homepage = ['/', '/cards'];
+
 export default function SearchAppBar() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
   const setSearchTermStore = useCardStore((state) => state.setSearchTerm);
   const { lazyFetch } = useCardSearch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSearch = () => {
+    if (!homepage.includes(location.pathname)) {
+      navigate('/');
+    }
+
     setCardsLoading(true);
     setSearchTermStore(searchTerm);
     lazyFetch(searchTerm, () => {
