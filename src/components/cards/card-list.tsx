@@ -29,7 +29,7 @@ const ImageWithFallback = ({ card }: { card: Card }) => {
 const CardList = () => {
   const cards = useCardStore((state) => state.cards);
   const cardsLoading = useCardStore((state) => state.cardsLoading);
-  const sm = useMediaQuery('(min-width:400px)');
+  const sm = useMediaQuery('(min-width:440px)');
   const md = useMediaQuery('(min-width:768px)');
   const lg = useMediaQuery('(min-width:900px)');
   const xl = useMediaQuery('(min-width:1200px)');
