@@ -7,23 +7,22 @@ import useReplaceManaSymbols from "../../hooks/useReplaceManaSymbols";
 
 const CardInfo = () => {
   const card = useCardStore((state) => state.card);
-  console.log("🚀 ~ CardInfo ~ card:", card)
   const replaceManaSymbols = useReplaceManaSymbols();
 
   return (
     <>
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} columns={{ xs: 16, sm: 16, md: 16 }}>
-          <Grid size={{ xs: 16, sm: 16, md: 8 }} sx={{ display: 'flex', justifyContent: 'center'}}>
+      <Box className="card-page-card-info-wrapper" sx={{ width: '100%' }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }} columns={{ xs: 16, sm: 16, md: 16 }}>
+          <Grid height={{ xs: 700, sm: 700, md: 'auto' }} size={{ xs: 16, sm: 16, md: 8 }} sx={{ display: 'flex', justifyContent: 'center'}}>
           <img className="card-page-card-image" src={card?.imageUris.normal} alt={card?.name} />
           </Grid>
           <Grid className="card-page-card-info" size={{ xs: 16, sm: 16, md: 8 }}>
             <div className="row">
-              <span className="label">Card Name:</span>
+              <span className="label flex-center">Card Name:</span>
               <span className="value">{card?.name}</span>
             </div>
               <div className="row">
-              <span className="label">Mana Cost:</span>
+              <span className="label flex-center">Mana Cost:</span>
               <span className="value" style={{whiteSpace: "pre-wrap"}}>{card?.oracleText ? replaceManaSymbols(card?.manaCost, 'medium') : null}</span>
             </div>
             <div className="row">
@@ -31,11 +30,11 @@ const CardInfo = () => {
               <span className="value" style={{whiteSpace: "pre-wrap"}}>{card?.oracleText ? replaceManaSymbols(card?.oracleText) : null}</span>
             </div>
             <div className="row">
-              <span className="label">Rarity:</span>
+              <span className="label flex-center">Rarity:</span>
               <span className="value" style={{ textTransform: 'capitalize' }}>{card?.rarity}</span>
             </div>
             <div className="row">
-              <span className="label">Artist:</span>
+              <span className="label flex-center">Artist:</span>
               <span className="value">{card?.artist}</span>
             </div>
           </Grid>

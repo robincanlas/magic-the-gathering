@@ -26,6 +26,17 @@ const getCustomManaIcon = (symbol: string): string | null => {
 export type SymbolSize = 'small' | 'medium' | 'large';
 
 const useReplaceManaSymbols = () => {
+
+  const replaceWithLineBreaks = (text: string) => {
+      if (!text.includes('\n')) {
+        return text;
+      }
+
+      return text.split('\n').map((line, index) => (
+        <p key={index}>{line}</p>
+      ));
+  };
+
   const replaceManaSymbols = (text: string, size: SymbolSize = 'small'): JSX.Element => {
     const parts = text.split(/(\{[^}]+\})/g); // Match anything between { }
 
@@ -50,9 +61,8 @@ const useReplaceManaSymbols = () => {
               );
             }
           }
-
           // Not a symbol, just return text
-          return <span key={index}>{part}</span>;
+          return <span className="mana-text-only" key={index}>{replaceWithLineBreaks(part)}</span>;
         })}
       </>
     );

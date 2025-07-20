@@ -1,28 +1,42 @@
 .card-page-card-info-wrapper {
-  display: flex; 
-  gap: 50px;
-}
-
-.card-page-card-image {
+  width: 100%;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 .card-page-card-info {
   display: flex;
   flex-direction: column;
-}
+  padding-left: 2em;
+  padding-bottom: 2em;
 
-.card-page-card-info .row {
-  display: flex;
-  gap: 10px;
-
-  .value {
-    width: 60%;
+  .mana-text-only {
+    p:first-child {
+      margin-top: 0;
+    }
   }
+  .row {
+    border-bottom: 1px solid gray;
+    padding: 5px 0;
+    display: flex;
+    gap: 10px;
 
-  .label {
-    width: 130px;
-    text-align: right;
-    font-weight: bold;
+    .value {
+      width: 60%;
+    }
+
+    .label {
+      width: 130px;
+      text-align: right;
+      font-weight: bold;
+    }
+    .flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
   }
 }
 
@@ -30,5 +44,21 @@
   .card-page-card-image {
     transform: scale(0.7);
     transform-origin: center;
+  }
+  .card-page-card-info {
+    padding: 0 0 2em 0;
+    .row {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .label {
+        display: flex;
+        justify-content: start;
+        width: 100%;
+      }
+      .value {
+        width: 100%;
+      }
+    }
   }
 }
