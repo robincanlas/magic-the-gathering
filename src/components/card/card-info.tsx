@@ -2,10 +2,13 @@ import { Box } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import useCardStore from "../../store/cardStore";
 import './card.css';
-import CardText from "./card-text";
+import './mana.css';
+import useReplaceManaSymbols from "../../hooks/useReplaceManaSymbols";
 
 const CardInfo = () => {
   const card = useCardStore((state) => state.card);
+  console.log("🚀 ~ CardInfo ~ card:", card)
+  const replaceManaSymbols = useReplaceManaSymbols();
 
   return (
     <>
@@ -19,9 +22,13 @@ const CardInfo = () => {
               <span className="label">Card Name:</span>
               <span className="value">{card?.name}</span>
             </div>
+              <div className="row">
+              <span className="label">Mana Cost:</span>
+              <span className="value" style={{whiteSpace: "pre-wrap"}}>{card?.oracleText ? replaceManaSymbols(card?.manaCost, 'medium') : null}</span>
+            </div>
             <div className="row">
               <span className="label">Card Text:</span>
-              <span className="value" style={{whiteSpace: "pre-wrap"}}><CardText oracleText={card?.oracleText} /></span>
+              <span className="value" style={{whiteSpace: "pre-wrap"}}>{card?.oracleText ? replaceManaSymbols(card?.oracleText) : null}</span>
             </div>
             <div className="row">
               <span className="label">Rarity:</span>
