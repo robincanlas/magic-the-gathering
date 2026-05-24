@@ -8,7 +8,6 @@ import './double-face-card-info.css';
 
 const DoubleFaceCardInfo = () => {
   const card = useCardStore((state) => state.card);
-  console.log("🚀 ~ DoubleFaceCardInfo ~ card:", card)
   
   const replaceManaSymbols = useReplaceManaSymbols();
   const [isFlipped, setIsFlipped] = useState(false);
@@ -43,7 +42,7 @@ const DoubleFaceCardInfo = () => {
             </Box>
             {cardFace2 && (
               <IconButton className="dfci-flip-button" size="small" onClick={toggleFlip} aria-label={isFlipped ? 'Show front' : 'Show back'}>
-                <FlipCameraAndroidIcon sx={{ fontSize: 35 }} />
+                <FlipCameraAndroidIcon sx={{ fontSize: 50 }} />
               </IconButton>
             )}
           </Grid>

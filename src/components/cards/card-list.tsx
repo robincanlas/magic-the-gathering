@@ -1,5 +1,5 @@
 import useCardStore, { Card } from '../../store/cardStore';
-import { NavLink } from 'react-router';
+import { NavLink, useSearchParams } from 'react-router';
 import { ImageList, ImageListItem, useMediaQuery } from '@mui/material';
 import MyCircularProgress from '../my-circular-progress/myCircularProgress';
 import ScrollTopButton from '../scroll-top/scroll-top';
@@ -29,6 +29,8 @@ const ImageWithFallback = ({ card }: { card: Card }) => {
 
 const CardList = () => {
   const cards = useCardStore((state) => state.cards);
+  const [searchParams] = useSearchParams(); 
+  const query = searchParams.get('search');
   const cardsLoading = useCardStore((state) => state.cardsLoading);
   const sm = useMediaQuery('(min-width:440px)');
   const md = useMediaQuery('(min-width:768px)');
@@ -51,7 +53,7 @@ const CardList = () => {
           card.cardFaces.length > 0 ? (
             <DoubleFaceCardElement key={card.id} card={card} />
           ) : (
-          <NavLink to={`/card/${card.id}`} key={card.id}>
+          <NavLink to={`/card/${card.id}${query ? `?search=${encodeURIComponent(query)}` : ''}`} key={card.id}>
               <ImageWithFallback card={card} />
           </NavLink>
         )))}

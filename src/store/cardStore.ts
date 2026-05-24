@@ -75,7 +75,6 @@ export interface CardState {
   nextPageUrl: string;
   prevPageUrl: string;
   maxCardsPerPage: number;
-  searchTerm: string;
   searchUri: string;
   page: number;
   setCards: (cards: Card[]) => void;
@@ -85,7 +84,6 @@ export interface CardState {
   setTotalCards: (totalCards: number) => void;
   setNextPageUrl: (url: string) => void;
   setPrevPageUrl: (url: string) => void;
-  setSearchTerm: (searchTerm: string) => void;
   setSearchUri: (searchUri: string) => void;
   setPage: (page: number) => void;
 }
@@ -99,7 +97,6 @@ const useCardStore = create<CardState>((set) => ({
   nextPageUrl: '',
   prevPageUrl: '',
   maxCardsPerPage: 175,
-  searchTerm: '',
   searchUri: '',
   page: 1,
   setCards: (cards: Card[]) => set({ cards }),
@@ -109,7 +106,6 @@ const useCardStore = create<CardState>((set) => ({
   setTotalCards: (totalCards: number) => set({ totalCards }),
   setNextPageUrl: (url: string) => set({ nextPageUrl: url }),
   setPrevPageUrl: (url: string) => set({ prevPageUrl: url }),
-  setSearchTerm: (searchTerm: string) => set({ searchTerm }),
   setSearchUri: (searchUri: string) => set({ searchUri }),
   setPage: (page: number) => set({ page }),
 }));

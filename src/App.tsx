@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Outlet } from "react-router";
+import { HashRouter, Routes, Route, Outlet, useSearchParams } from "react-router";
 import './App.css'
 import Cards from './components/cards/cards'
 import Card from './components/card/card';
@@ -18,17 +18,24 @@ const theme = createTheme({
 const INITIAL_SEARCH_TERM = 'is:reserved';
 
 const Layout = () => {
+  const [searchParams, setSearchParams] = useSearchParams(); 
+  const query = searchParams.get('search');
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
-  const setSearchTerm = useCardStore((state) => state.setSearchTerm);
   const { lazyFetch } = useCardSearch();
 
   useEffect(() => {
     let isMounted = true;
+    const searchValue = query || INITIAL_SEARCH_TERM;
+
+    if (!query) {
+      setSearchParams({ search: searchValue }, { replace: true });
+      return () => {
+        isMounted = false;
+      };
+    }
 
     setCardsLoading(true);
-    setSearchTerm(INITIAL_SEARCH_TERM);
-
-    lazyFetch(INITIAL_SEARCH_TERM, () => {
+    lazyFetch(searchValue, () => {
       if (isMounted) {
         setCardsLoading(false);
       }
@@ -37,7 +44,7 @@ const Layout = () => {
     return () => {
       isMounted = false;
     };
-  }, [lazyFetch, setCardsLoading, setSearchTerm]);
+  }, [query, lazyFetch, setCardsLoading, setSearchParams]);
   
   return (
     <>

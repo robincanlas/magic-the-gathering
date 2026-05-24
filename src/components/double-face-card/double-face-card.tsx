@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Box, IconButton, ImageListItem } from '@mui/material';
-import { NavLink } from 'react-router';
+import { NavLink, useSearchParams } from 'react-router';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import { Card } from '../../store/cardStore';
 import cardBack from '../../assets/magic-back.jpg';
 import './double-face-card.css';
 
 const DoubleFaceCardElement = ({ card }: { card: Card }) => {
+  const [searchParams] = useSearchParams(); 
+  const query = searchParams.get('search');
   const [isFlipped, setIsFlipped] = useState(false);
   const cardFace1 = card.cardFaces[0];
   const cardFace2 = card.cardFaces[1];
@@ -31,7 +33,7 @@ const DoubleFaceCardElement = ({ card }: { card: Card }) => {
 
   return (
     <ImageListItem key={card.id} className="card-list-image-item double-face-card-root">
-      <NavLink to={`/card/${card.id}`} className="card-link" style={{ display: 'block' }}>
+      <NavLink to={`/card/${card.id}${query ? `?search=${encodeURIComponent(query)}` : ''}`} className="card-link" style={{ display: 'block' }}>
         <Box className="flip-card">
           <Box className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
             <Box className="flip-card-side flip-card-front">
@@ -64,7 +66,7 @@ const DoubleFaceCardElement = ({ card }: { card: Card }) => {
           }}
           aria-label={isFlipped ? 'Show front face' : 'Show back face'}
         >
-          <FlipCameraAndroidIcon />
+          <FlipCameraAndroidIcon sx={{ fontSize: 35 }} />
         </IconButton>
       )}
     </ImageListItem>

@@ -12,7 +12,7 @@ const CardInfo = () => {
   return (
     <>
       <Box className="card-page-card-info-wrapper">
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }} columns={{ xs: 16, sm: 16, md: 16 }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 4 }} columns={{ xs: 16, sm: 16, md: 16 }}>
           <Grid height={{ xs: 430, sm: 430, md: 600 }} size={{ xs: 16, sm: 16, md: 8 }} sx={{ display: 'flex', justifyContent: 'center'}}>
             <img className="card-page-card-image" src={card?.imageUris.large} alt={card?.name} />
           </Grid>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import { API_BASE_URL } from "../../constants";
 import useCardStore, { CardData } from "../../store/cardStore";
 import { useDebounceCallback } from "usehooks-ts";
@@ -13,6 +13,7 @@ import DoubleFaceCardInfo from "./double-face-card-info/double-face-card-info";
 const CardPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const setCard = useCardStore((state) => state.setCard);
   const card = useCardStore((state) => state.card);
@@ -35,6 +36,16 @@ const CardPage = () => {
     }
   }, [id]);
 
+  const navigateToHome = () => {
+    const query = searchParams.get('search');
+    const term = query ? decodeURIComponent(query) : '';
+    if (term) {
+      navigate(`/cards?search=${encodeURIComponent(term)}`);
+    } else {
+      navigate(`/`);
+    }
+  };
+
 
   if (loading) {
     return <MyCircularProgress />;
@@ -44,10 +55,9 @@ const CardPage = () => {
     return <div className="card-page">Card not found</div>;
   }
 
-
   return (
     <div className="card-page">
-      <Button onClick={() => navigate(`/`)}>Back to Homepage</Button>
+      <Button onClick={navigateToHome}>Back to Homepage</Button>
       <Container maxWidth="md" sx={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
         {card.cardFaces.length > 1 ? <DoubleFaceCardInfo /> : <CardInfo />}
       </Container>
