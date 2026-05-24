@@ -1,9 +1,10 @@
 import CardList from './card-list';
 import CustomPagination from '../custom-pagination/custom-pagination';
-import useCardStore from '../../store/cardStore';
+import { useSearchParams } from 'react-router';
 
 const SearchTerm = () => {
-  const searchTerm = useCardStore((state) => state.searchTerm);
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get('search');
 
   if (!searchTerm) {
     return null;

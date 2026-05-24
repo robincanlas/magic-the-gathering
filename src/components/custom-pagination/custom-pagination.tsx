@@ -3,11 +3,13 @@ import { Pagination } from '@mui/material';
 import useCardStore from '../../store/cardStore';
 import useCardSearch from '../../hooks/useCardSearch';
 import { API_BASE_URL } from '../../constants';
+import { useSearchParams } from 'react-router';
 
 const CustomPagination = () => {
   const totalCards = useCardStore((state) => state.totalCards);
-  const searchTerm = useCardStore((state) => state.searchTerm);
   const page = useCardStore((state) => state.page);
+  const [searchParams] = useSearchParams();
+  const searchTerm = searchParams.get('search') || '';
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
   const setPage = useCardStore((state) => state.setPage);
   const { lazyFetchCustomUri } = useCardSearch();
