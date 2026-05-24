@@ -5,6 +5,7 @@ import MyCircularProgress from '../my-circular-progress/myCircularProgress';
 import ScrollTopButton from '../scroll-top/scroll-top';
 import cardBack from '../../assets/magic-back.jpg';
 import './cards.css';
+import DoubleFaceCardElement from '../double-face-card/double-face-card';
 
 const ImageWithFallback = ({ card }: { card: Card }) => {
   
@@ -47,10 +48,13 @@ const CardList = () => {
     <>
       <ImageList className='card-list-image' sx={{ width: "100%", height: "100%" }} gap={24} cols={imageListColumns} rowHeight="auto">
         {cards.map((card) => (
+          card.cardFaces.length > 0 ? (
+            <DoubleFaceCardElement key={card.id} card={card} />
+          ) : (
           <NavLink to={`/card/${card.id}`} key={card.id}>
               <ImageWithFallback card={card} />
           </NavLink>
-        ))}
+        )))}
       </ImageList>
       <ScrollTopButton />
     </>

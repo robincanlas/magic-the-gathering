@@ -75,6 +75,7 @@ export default function SearchAppBar() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
   const setSearchTermStore = useCardStore((state) => state.setSearchTerm);
+  const setCard = useCardStore((state) => state.setCard);
   const { lazyFetch } = useCardSearch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,6 +86,7 @@ export default function SearchAppBar() {
     }
 
     setCardsLoading(true);
+    setCard(null);
     setSearchTermStore(searchTerm);
     lazyFetch(searchTerm, () => {
       setCardsLoading(false);

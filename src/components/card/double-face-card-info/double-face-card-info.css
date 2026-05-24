@@ -1,0 +1,56 @@
+/* Flip card styles for the large card view */
+.dfci-flip-card {
+	width: 100%;
+	max-width: 420px;
+	perspective: 1000px;
+}
+
+.dfci-flip-card-inner {
+	position: relative;
+	width: 100%;
+	transform-style: preserve-3d;
+	transition: transform 0.6s ease;
+}
+
+.dfci-flip-card-inner.flipped {
+	transform: rotateY(180deg);
+}
+
+.dfci-flip-card-side {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	backface-visibility: hidden;
+}
+
+.dfci-front,
+.dfci-back {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card-page-card-image {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	display: block;
+}
+
+.dfci-back {
+	transform: rotateY(180deg);
+}
+
+.dfci-flip-button {
+  position: absolute !important;
+  top: 40%;
+  right: 10%;
+	z-index: 5;
+	background: rgba(255,255,255,0.9);
+}
+
+.dfci-flip-button:hover {
+	background: rgba(255,255,255,1);
+}
+

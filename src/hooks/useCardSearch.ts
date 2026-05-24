@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../constants';
-import useCardStore, { Card, CardData, CardInfo, ScryFallResponse } from '../store/cardStore';
+import useCardStore, { Card, CardData, CardFaceData, CardInfo, ScryFallResponse } from '../store/cardStore';
 import { useDebounceCallback } from 'usehooks-ts';
 
 const useCardSearch = () => {
@@ -14,7 +14,6 @@ const useCardSearch = () => {
     }
   }
 
-
   const getCardData = (card: CardData) => {
     return {
       id: card.id,
@@ -27,18 +26,34 @@ const useCardSearch = () => {
         usd: card.prices.usd,
         eur: card.prices.eur
       },
-      imageUris: {
+      imageUris: card.image_uris ? {
         small: card.image_uris.small,
         normal: card.image_uris.normal,
         large: card.image_uris.large,
         png: card.image_uris.png
-      }
+      } : { small: '', normal: '', large: '', png: '' },
+      cardFaces: card.card_faces?.map((cardFace: CardFaceData) => {
+        return {
+          artist: cardFace.artist || '',
+          name: cardFace.name || '',
+          manaCost: cardFace.mana_cost,
+          oracleText: cardFace.oracle_text,
+          imageUris:  {
+            small: cardFace.image_uris?.small || '',
+            normal: cardFace.image_uris?.normal || '',
+            large: cardFace.image_uris?.large || '',
+            png: cardFace.image_uris?.png || ''
+          }
+        }
+      }) ?? []
     }
   }
+
   const constructCardList = (cardData: CardData[]): Card[] => {
     const cards = cardData.map((card: CardData) => ({
       ...card,
-      image_uris: card.image_uris ? card.image_uris : { small: '', normal: '', large: '', png: '' }
+      image_uris: card.image_uris ? card.image_uris : { small: '', normal: '', large: '', png: '' },
+      card_faces: card.card_faces ? card.card_faces : []
     })).map((card: CardData) => (getCardData(card)));
     return cards;
   }

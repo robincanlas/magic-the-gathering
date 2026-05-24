@@ -1,0 +1,59 @@
+.double-face-card-root {
+  position: relative;
+}
+
+.flip-card {
+  width: 100%;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front,
+.flip-card-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-front img,
+.flip-card-back img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card-button {
+  position: absolute !important;
+  top: 50%;
+  right: 10%;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 2;
+}
+
+.flip-card-button:hover {
+  background: rgba(255, 255, 255, 1);
+}

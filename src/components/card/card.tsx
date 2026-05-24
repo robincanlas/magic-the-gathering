@@ -8,6 +8,7 @@ import MyCircularProgress from "../my-circular-progress/myCircularProgress";
 import useCardSearch from "../../hooks/useCardSearch";
 import CardInfo from "./card-info";
 import { Button, Container } from "@mui/material";
+import DoubleFaceCardInfo from "./double-face-card-info/double-face-card-info";
 
 const CardPage = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const CardPage = () => {
     .then((response) => {
       setCard(getCardDataForView(response.data as CardData));
     }).catch((error) => {
-      console.log("🚀 ~ file: card.tsx:15 ~ .then ~ error:", error)
+      console.error("🚀 ~ file: card.tsx:15 ~ .then ~ error:", error)
     }).finally(() => {
       setLoading(false);
     });
@@ -40,7 +41,7 @@ const CardPage = () => {
   }
 
   if (!card) {
-    return <div>Card not found</div>;
+    return <div className="card-page">Card not found</div>;
   }
 
 
@@ -48,7 +49,7 @@ const CardPage = () => {
     <div className="card-page">
       <Button onClick={() => navigate(`/`)}>Back to Homepage</Button>
       <Container maxWidth="md" sx={{ display: 'flex', height: '100vh', alignItems: 'center' }}>
-        <CardInfo />
+        {card.cardFaces.length > 1 ? <DoubleFaceCardInfo /> : <CardInfo />}
       </Container>
     </div>
   );

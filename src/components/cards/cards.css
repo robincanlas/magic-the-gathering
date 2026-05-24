@@ -6,8 +6,3 @@
   border: 1px solid black;
   transition: border 0.2s ease-in-out;
 }
-
-.MuiImageListItem-root.card-list-image-item:hover {
-  border: 2px solid #fff;
-}
-
