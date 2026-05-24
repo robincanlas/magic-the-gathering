@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 type ManaSymbolMap = Record<string, string>;
 
 const baseManaSymbols: ManaSymbolMap = {
@@ -37,7 +39,7 @@ const useReplaceManaSymbols = () => {
       ));
   };
 
-  const replaceManaSymbols = (text: string, size: SymbolSize = 'small'): JSX.Element => {
+  const replaceManaSymbols = (text: string, size: SymbolSize = 'small'): ReactNode => {
     const parts = text.split(/(\{[^}]+\})/g); // Match anything between { }
 
     return (

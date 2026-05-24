@@ -15,18 +15,29 @@ const theme = createTheme({
   },
 });
 
+const INITIAL_SEARCH_TERM = 'is:reserved';
+
 const Layout = () => {
   const setCardsLoading = useCardStore((state) => state.setCardsLoading);
   const setSearchTerm = useCardStore((state) => state.setSearchTerm);
   const { lazyFetch } = useCardSearch();
 
   useEffect(() => {
+    let isMounted = true;
+
     setCardsLoading(true);
-    setSearchTerm('is:reserved');
-    lazyFetch('is:reserved', () => {
-      setCardsLoading(false);
+    setSearchTerm(INITIAL_SEARCH_TERM);
+
+    lazyFetch(INITIAL_SEARCH_TERM, () => {
+      if (isMounted) {
+        setCardsLoading(false);
+      }
     });
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [lazyFetch, setCardsLoading, setSearchTerm]);
   
   return (
     <>
